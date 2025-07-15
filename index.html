@@ -60,7 +60,10 @@
       else if (p.tipus === "video") {
         const vid = document.createElement("iframe");
         vid.src = p.url + "?autoplay=1&mute=1";
-        vid.allow = "autoplay";
+        vid.style.width = "100%";
+		    vid.style.height = "100%";
+		    vid.style.border = "none";
+		    vid.allow = "autoplay";
         vid.frameBorder = 0;
         cont.appendChild(vid);
       }
