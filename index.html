@@ -16,6 +16,9 @@
       align-items: center;
       height: 100vh;
     }
+    h1 {
+      font-size: 60px;
+    }
     .contenidor {
       width: 90%;
       height: 90%;
@@ -92,9 +95,10 @@
       }
       else if (p.tipus === "text") {
         const div = document.createElement("div");
-        div.className = "text";
-        div.innerHTML = `<h1>${p.text}</h1>`;
-        cont.appendChild(div);
+        div.className = "text-marquee";
+	const span = document.createElement("span");
+        span.innerHTML = `<h1>${p.text}</h1>`;
+        cont.appendChild(span);
       }
     }
 
