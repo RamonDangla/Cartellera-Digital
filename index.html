@@ -34,7 +34,7 @@
       padding: 1em;
     }
     .text-marquee {
-      font-size: 2em;
+      font-size: 5em;
       white-space: nowrap;
       overflow: hidden;
       width: 100%;
@@ -97,7 +97,7 @@
         const div = document.createElement("div");
         div.className = "text-marquee";
 	const span = document.createElement("span");
-        span.innerHTML = `<h1>${p.text}</h1>`;
+        span.textContent  = p.text;
         cont.appendChild(span);
       }
     }
