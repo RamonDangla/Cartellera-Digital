@@ -35,16 +35,20 @@
     }
     .text-marquee {
       font-size: 5em;
+      background-color: #030;
       white-space: nowrap;
       overflow: hidden;
       width: 100%;
+      top:250px;
       position: relative;
     }
 	
     .text-marquee span {
       display: inline-block;
       position: absolute;
-      animation: moure 15s linear infinite;
+      animation: moure 8s linear infinite;
+      left: -300px;
+      width: 300px;
     }
 	
     @keyframes moure {
