@@ -55,7 +55,10 @@
       else if (p.tipus === "imatge") {
         const img = document.createElement("img");
         img.src = p.url;
-        cont.appendChild(img);
+	img.style.width = "100%";
+	img.style.height = "100%";
+	img.style.border = "ridge";
+	cont.appendChild(img);
       }
       else if (p.tipus === "video") {
         const vid = document.createElement("iframe");
