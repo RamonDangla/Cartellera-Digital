@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartelleria Institut</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .contenidor {
+      width: 90%;
+      height: 90%;
+    }
+    img, iframe {
+      max-width: 100%;
+      max-height: 100%;
+    }
+    .text {
+      font-size: 2em;
+      padding: 1em;
+    }
+  </style>
+</head>
+<body>
+  <div class="contenidor" id="contenidor">Carregant...</div>
+
+  <script>
+    let pantalles = [];
+    let index = 0;
+
+    async function carregaPantalles() {
+      const resposta = await fetch("URL_DEL_SERVEI_WEB");
+      pantalles = await resposta.json();
+    }
+
+    function mostraPantalla(p) {
+      const cont = document.getElementById("contenidor");
+      cont.innerHTML = "";
+
+      if (p.tipus === "horari") {
+        const div = document.createElement("div");
+        div.className = "text";
+        div.innerHTML = `<h1>Classe Actual</h1><p>${p.text}</p>`;
+        cont.appendChild(div);
+      }
+      else if (p.tipus === "imatge") {
+        const img = document.createElement("img");
+        img.src = p.url;
+        cont.appendChild(img);
+      }
+      else if (p.tipus === "video") {
+        const vid = document.createElement("iframe");
+        vid.src = p.url + "?autoplay=1&mute=1";
+        vid.allow = "autoplay";
+        vid.frameBorder = 0;
+        cont.appendChild(vid);
+      }
+      else if (p.tipus === "text") {
+        const div = document.createElement("div");
+        div.className = "text";
+        div.textContent = p.text;
+        cont.appendChild(div);
+      }
+    }
+
+    async function iniciarCicle() {
+      await carregaPantalles();
+      if (pantalles.length === 0) return;
+      mostraPantalla(pantalles[index]);
+      setTimeout(() => {
+        index = (index + 1) % pantalles.length;
+        iniciarCicle();
+      }, (pantalles[index].duracio || 10) * 1000);
+    }
+
+    iniciarCicle();
+  </script>
+</body>
+</html>
